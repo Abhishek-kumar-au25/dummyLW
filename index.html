@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard with Theme Selection</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body class="bg-gray-100 font-sans" id="body">
+    <!-- Header -->
+    <header class="bg-white shadow-md dark:bg-gray-800">
+        <div class="container mx-auto flex items-center justify-between px-6 py-4">
+            <!-- Logo Section -->
+            <div class="flex items-center space-x-4 mr-auto">
+                <img src="Assets\LW Full Logo.svg" alt="MyApp Logo" class="h-8 w-auto">
+            </div>
+            
+            <!-- Right-aligned items (search bar, notification, theme toggle, profile) -->
+            <div class="flex items-center space-x-4 ml-auto">
+                <div class="hidden md:block">
+                    <input type="text" placeholder="Search..."
+                        class="w-full max-w-md rounded-lg border-gray-300 px-4 py-2 text-sm focus:border-blue-500 focus:ring focus:ring-blue-300 dark:bg-gray-700 dark:text-gray-200" />
+                </div>
+                
+                <!-- Notification Icon -->
+                <button class="relative">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-600 dark:text-gray-200" viewBox="0 0 20 20"
+                        fill="currentColor">
+                        <path
+                            d="M10 2a6 6 0 00-6 6v3.586l-.293.293a1 1 0 00.293 1.414l6 6a1 1 0 001.414 0l6-6a1 1 0 00.293-1.414l-.293-.293V8a6 6 0 00-6-6z" />
+                    </svg>
+                    <span
+                        class="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-red-500 text-xs text-white">3</span>
+                </button>
+    
+                <!-- Theme Selector -->
+                <button id="themeToggle" class="bg-gray-200 p-2 rounded-full dark:bg-gray-600">
+                    <svg id="lightIcon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-800 dark:hidden" viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M10 4a1 1 0 01-1-1V2a1 1 0 112 0v1a1 1 0 01-1 1zM4.22 5.22a1 1 0 01-1.42-1.42l.71-.7a1 1 0 111.42 1.41l-.7.71zM2 11a1 1 0 110-2h1a1 1 0 110 2H2zm12.78-5.78a1 1 0 000-1.42l.71-.71a1 1 0 011.42 1.42l-.7.71a1 1 0 01-1.43 0zM10 18a1 1 0 01-1-1v-1a1 1 0 112 0v1a1 1 0 01-1 1zm5.78-5.78a1 1 0 01-1.42 0 .99.99 0 010-1.42l.7-.71a1 1 0 111.42 1.42l-.7.71zm-10.56 0a1 1 0 01-1.42-1.42l.71-.71a1 1 0 011.42 1.42l-.7.71zM18 11a1 1 0 110-2h1a1 1 0 110 2h-1zM14.22 14.22a1 1 0 001.42 0 .99.99 0 000-1.42l-.71-.71a1 1 0 00-1.42 1.42l.7.71z" />
+                    </svg>
+                    <svg id="darkIcon" xmlns="http://www.w3.org/2000/svg" class="hidden h-6 w-6 text-gray-200" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M10 2a8 8 0 107.65 11.91.75.75 0 01.27-.8 7.97 7.97 0 01-4.47 1.39A8 8 0 0110 2z" clip-rule="evenodd" />
+                    </svg>
+                </button>
+    
+                <!-- Profile -->
+                <button>
+                    <img src="Assets\LW Symbol.svg" alt="Profile" class="h-10 w-10 rounded-full" />
+                </button>
+            </div>
+        </div>
+    </header>
+    
+
+    <!-- Main Section -->
+    <div class="flex">
+        <aside class="hidden w-70 bg-white p-4 shadow-md dark:bg-gray-800 dark:text-gray-200 md:block">
+            <nav>
+                <ul class="space-y-2">
+                    <li>
+                        <a href="#"
+                            class="flex items-center space-x-2 rounded-lg px-4 py-2 text-gray-700 hover:bg-blue-100 dark:hover:bg-blue-900 dark:text-gray-200">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
+                                fill="currentColor">
+                                <path d="M3 3a1 1 0 011-1h12a1 1 0 011 1v12a1 1 0 01-1 1H4a1 1 0 01-1-1V3z" />
+                            </svg>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#"
+                            class="flex items-center space-x-2 rounded-lg px-4 py-2 text-gray-700 hover:bg-blue-100 dark:hover:bg-blue-900 dark:text-gray-200">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
+                                fill="currentColor">
+                                <path d="M3 3a1 1 0 011-1h12a1 1 0 011 1v12a1 1 0 01-1 1H4a1 1 0 01-1-1V3z" />
+                            </svg>
+                            <span>Events</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#"
+                            class="flex items-center space-x-2 rounded-lg px-4 py-2 text-gray-700 hover:bg-blue-100 dark:hover:bg-blue-900 dark:text-gray-200">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
+                                fill="currentColor">
+                                <path d="M3 3a1 1 0 011-1h12a1 1 0 011 1v12a1 1 0 01-1 1H4a1 1 0 01-1-1V3z" />
+                            </svg>
+                            <span>Users</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#"
+                            class="flex items-center space-x-2 rounded-lg px-4 py-2 text-gray-700 hover:bg-blue-100 dark:hover:bg-blue-900 dark:text-gray-200">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
+                                fill="currentColor">
+                                <path d="M3 3a1 1 0 011-1h12a1 1 0 011 1v12a1 1 0 01-1 1H4a1 1 0 01-1-1V3z" />
+                            </svg>
+                            <span>Deleted Users</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#"
+                            class="flex items-center space-x-2 rounded-lg px-4 py-2 text-gray-700 hover:bg-blue-100 dark:hover:bg-blue-900 dark:text-gray-200">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
+                                fill="currentColor">
+                                <path d="M3 3a1 1 0 011-1h12a1 1 0 011 1v12a1 1 0 01-1 1H4a1 1 0 01-1-1V3z" />
+                            </svg>
+                            <span>Recordings</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#"
+                            class="flex items-center space-x-2 rounded-lg px-4 py-2 text-gray-700 hover:bg-blue-100 dark:hover:bg-blue-900 dark:text-gray-200">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
+                                fill="currentColor">
+                                <path d="M3 3a1 1 0 011-1h12a1 1 0 011 1v12a1 1 0 01-1 1H4a1 1 0 01-1-1V3z" />
+                            </svg>
+                            <span>Deleted Recordings</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#"
+                            class="flex items-center space-x-2 rounded-lg px-4 py-2 text-gray-700 hover:bg-blue-100 dark:hover:bg-blue-900 dark:text-gray-200">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
+                                fill="currentColor">
+                                <path d="M3 3a1 1 0 011-1h12a1 1 0 011 1v12a1 1 0 01-1 1H4a1 1 0 01-1-1V3z" />
+                            </svg>
+                            <span>Livewires</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#"
+                            class="flex items-center space-x-2 rounded-lg px-4 py-2 text-gray-700 hover:bg-blue-100 dark:hover:bg-blue-900 dark:text-gray-200">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
+                                fill="currentColor">
+                                <path d="M3 3a1 1 0 011-1h12a1 1 0 011 1v12a1 1 0 01-1 1H4a1 1 0 01-1-1V3z" />
+                            </svg>
+                            <span>API keys</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#"
+                            class="flex items-center space-x-2 rounded-lg px-4 py-2 text-gray-700 hover:bg-blue-100 dark:hover:bg-blue-900 dark:text-gray-200">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
+                                fill="currentColor">
+                                <path d="M3 3a1 1 0 011-1h12a1 1 0 011 1v12a1 1 0 01-1 1H4a1 1 0 01-1-1V3z" />
+                            </svg>
+                            <span>Protected passwords</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Content -->
+        <div class="flex-grow p-6 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            <!-- Android Users Chart -->
+            <div class="rounded-lg bg-white p-4 shadow-md dark:bg-gray-800 dark:text-gray-200">
+                <h2 class="text-lg font-semibold">Android Users</h2>
+                <div class="mt-4 h-64">
+                    <canvas id="androidUsersChart"></canvas>
+                </div>
+            </div>
+
+            <!-- iOS Users Chart -->
+            <div class="rounded-lg bg-white p-4 shadow-md dark:bg-gray-800 dark:text-gray-200">
+                <h2 class="text-lg font-semibold">iOS Users</h2>
+                <div class="mt-4 h-64">
+                    <canvas id="iosUsersChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Web Users Chart -->
+            <div class="rounded-lg bg-white p-4 shadow-md dark:bg-gray-800 dark:text-gray-200">
+                <h2 class="text-lg font-semibold">Web Users</h2>
+                <div class="mt-4 h-64">
+                    <canvas id="webUsersChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Upcoming Events -->
+            <div class="rounded-lg bg-white p-4 shadow-md dark:bg-gray-800 dark:text-gray-200">
+                <h2 class="text-lg font-semibold">Upcoming Events</h2>
+                <ul class="mt-4 space-y-2">
+                    <li class="flex items-center justify-between rounded-lg border p-3 dark:border-gray-700">
+                        <div>
+                            <p class="font-medium">Team Meeting</p>
+                            <p class="text-sm">Dec 21, 2024 | 10:00 AM</p>
+                        </div>
+                        <span class="rounded-full bg-blue-100 px-3 py-1 text-sm font-semibold text-blue-600 dark:bg-blue-900 dark:text-blue-200">Work</span>
+                    </li>
+                    <li class="flex items-center justify-between rounded-lg border p-3 dark:border-gray-700">
+                        <div>
+                            <p class="font-medium">Team Meeting</p>
+                            <p class="text-sm">Dec 21, 2024 | 10:00 AM</p>
+                        </div>
+                        <span class="rounded-full bg-blue-100 px-3 py-1 text-sm font-semibold text-blue-600 dark:bg-blue-900 dark:text-blue-200">Work</span>
+                    </li>
+                    <li class="flex items-center justify-between rounded-lg border p-3 dark:border-gray-700">
+                        <div>
+                            <p class="font-medium">Team Meeting</p>
+                            <p class="text-sm">Dec 21, 2024 | 10:00 AM</p>
+                        </div>
+                        <span class="rounded-full bg-blue-100 px-3 py-1 text-sm font-semibold text-blue-600 dark:bg-blue-900 dark:text-blue-200">Work</span>
+                    </li>
+                    <li class="flex items-center justify-between rounded-lg border p-3 dark:border-gray-700">
+                        <div>
+                            <p class="font-medium">Team Meeting</p>
+                            <p class="text-sm">Dec 21, 2024 | 10:00 AM</p>
+                        </div>
+                        <span class="rounded-full bg-blue-100 px-3 py-1 text-sm font-semibold text-blue-600 dark:bg-blue-900 dark:text-blue-200">Work</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <section>
+        
+    </section>
+    <script>
+        // Chart Configuration
+        function createBarChart(ctx, label, data, color) {
+            return new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                    datasets: [{
+                        label: label,
+                        data: data,
+                        backgroundColor: color,
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: { beginAtZero: true }
+                    }
+                }
+            });
+        }
+
+        createBarChart(document.getElementById('androidUsersChart').getContext('2d'), 'Android Users', [50, 70, 90, 110, 130, 150, 160, 180, 200, 220, 240, 260], 'rgba(59, 130, 246, 0.8)');
+        createBarChart(document.getElementById('iosUsersChart').getContext('2d'), 'iOS Users', [40, 60, 80, 100, 120, 140, 150, 170, 190, 210, 230, 250], 'rgba(16, 185, 129, 0.8)');
+        createBarChart(document.getElementById('webUsersChart').getContext('2d'), 'Web Users', [30, 50, 70, 90, 110, 130, 140, 160, 180, 200, 220, 240], 'rgba(244, 114, 182, 0.8)');
+
+        // Theme Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const lightIcon = document.getElementById('lightIcon');
+        const darkIcon = document.getElementById('darkIcon');
+        const body = document.getElementById('body');
+
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark');
+            lightIcon.classList.toggle('hidden');
+            darkIcon.classList.toggle('hidden');
+        });
+    </script>
+</body>
+
+</html>
